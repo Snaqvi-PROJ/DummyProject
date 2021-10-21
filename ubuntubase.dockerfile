@@ -1,4 +1,4 @@
 #This is a sample Image
 FROM ubuntu:latest
-MAINTAINER demousr@gmail.com
+MAINTAINER saifnaqviit3019@gmail.com
 ENTRYPOINT ["echo", "saif"]
