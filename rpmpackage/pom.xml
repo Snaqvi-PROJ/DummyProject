@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>collection.trash</groupId>
+  <artifactId>newpackage</artifactId>
+  <version>1.0.2</version>
+
+  <name>Land-Based Trash Repository</name>
+  <description>This is a sample using trash collection as an example.</description>
+
+  <organization>
+    <name>Sanitation Workers of Washington, D.C.</name>
+    <url>https://www.trash.gov/</url>
+  </organization>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>rpm-maven-plugin</artifactId>
+        <version>2.2.0</version>
+        <executions>
+          <execution>
+            <id>generate-rpm</id>
+            <goals>
+              <goal>rpm</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <license>SAIF:LICENCE</license>
+          <distribution>NA</distribution>
+          <group>Application/Collectors</group>
+          <packager>saifnaqviit3019@gmail.com</packager>
+          <prefix>/usr/local</prefix>
+          <changelogFile>src/changelog</changelogFile>
+          <defineStatements>
+            <defineStatement>_unpackaged_files_terminate_build 0</defineStatement>
+          </defineStatements>
+          <mappings>
+            <mapping>
+              <directory>/usr/local/rpmpackage/bin</directory>
+              <filemode>440</filemode>
+              <username>dumper</username>
+              <groupname>dumpgroup</groupname>
+              <sources>
+                <source>
+                  <location>src/bin</location>
+                </source>
+              </sources>
+            </mapping>
+            <mapping>
+              <directory>/usr/local/rpmpackage/log</directory>
+              <filemode>777</filemode>
+              <username>dumper</username>
+              <groupname>dumpgroup</groupname>
+              <sources>
+                <source>
+                  <location>src/log</location>
+                </source>
+              </sources>
+            </mapping>
+            <mapping>
+              <directory>/usr/local/rpmpackage/conf</directory>
+              <filemode>440</filemode>
+              <username>dumper</username>
+              <groupname>dumpgroup</groupname>
+              <sources>
+                <source>
+                  <location>src/conf</location>
+                </source>
+              </sources>
+            </mapping>
+          </mappings>
+          <preinstallScriptlet>
+            <script>echo "installing ${project.name} now"</script>
+          </preinstallScriptlet>
+          <postinstallScriptlet>
+            <scriptFile>src/main/scripts/postinstall</scriptFile>
+            <fileEncoding>utf-8</fileEncoding>
+            <filter>true</filter>
+          </postinstallScriptlet>
+          <preremoveScriptlet>
+            <scriptFile>src/main/scripts/preremove</scriptFile>
+            <fileEncoding>utf-8</fileEncoding>
+          </preremoveScriptlet>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
