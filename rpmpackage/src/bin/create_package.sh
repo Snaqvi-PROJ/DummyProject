@@ -10,7 +10,7 @@ echo ""
 configFile="/home/Drive2/rpm-gen/conf/gen.config"
 . $configFile
 logFile="$log/createlog.$pid"
-echo "$logFile - saif"
+echo "$logFile"
 
 baseDirectory=$1
 projectName=$2
